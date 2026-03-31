@@ -86,8 +86,8 @@ class RobotChase : public rclcpp::Node
             std::shared_ptr<Coordinates> chaser_coords = calculate_coord("rick/base_link");
             std::shared_ptr<Coordinates> runner_coords = calculate_coord(objective_frame_);
 
-            RCLCPP_INFO(this->get_logger(), "chaser coords-> x:%.2f, y:%.2f", chaser_coords->x, chaser_coords->y);
-            RCLCPP_INFO(this->get_logger(), "runner coords-> x:%.2f, y:%.2f", runner_coords->x, runner_coords->y);
+            //RCLCPP_INFO(this->get_logger(), "chaser coords-> x:%.2f, y:%.2f", chaser_coords->x, chaser_coords->y);
+            //RCLCPP_INFO(this->get_logger(), "runner coords-> x:%.2f, y:%.2f", runner_coords->x, runner_coords->y);
 
             chase(chaser_coords, runner_coords);
         }
@@ -159,7 +159,7 @@ class RobotChase : public rclcpp::Node
             double dx = runner_coords->x - chaser_coords->x;
             double dy = runner_coords->y - chaser_coords->y;
             double distance = std::sqrt(dx*dx + dy*dy);
-            RCLCPP_INFO(this->get_logger(), "distance: %.2f", distance);
+            //RCLCPP_INFO(this->get_logger(), "distance: %.2f", distance);
 
 
             // --- Angle to target position ---
@@ -173,7 +173,7 @@ class RobotChase : public rclcpp::Node
 
             //RCLCPP_INFO(this->get_logger(), "dyaw: %.2f", dyaw);
             //RCLCPP_INFO(this->get_logger(), "chaser yaw: %.2f", chaser_coords->yaw);
-            RCLCPP_INFO(this->get_logger(), "yaw_error: %.2f", yaw_error);
+            //RCLCPP_INFO(this->get_logger(), "yaw_error: %.2f", yaw_error);
 
             //constexpr tells complier kp_yaw and kp_distance values at complie time instead of at runtime
             constexpr double kp_yaw = 1;
@@ -195,7 +195,7 @@ class RobotChase : public rclcpp::Node
 
 
             // --- Stop if close enough ---
-            if (distance < 0.4) {
+            if (distance < 0.37) {
                 cmd.linear.x  = 0.0;
                 cmd.angular.z = 0.0;
             }
